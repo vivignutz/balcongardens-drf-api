@@ -37,4 +37,3 @@ class PostSerializer(serializers.ModelSerializer):
             'profile_image', 'created_at', 'updated_at',
             'title', 'content', 'image', 'image_filter'
         ]      # ou coloca isso pra inserir tudo: '__all__'
-
