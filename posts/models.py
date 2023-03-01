@@ -6,6 +6,7 @@ class Post(models.Model):
     """
     Post model, related to 'owner', i.e. a User instance.
     Default image set so that we can always reference image.url.
+    Filter for image choice.
     """
 
 
