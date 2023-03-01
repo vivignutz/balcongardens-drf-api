@@ -15,6 +15,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         # aponta para o profile e especifica os campos que queremos incluir
         model = Profile
         fields = [
-            'id', 'owner', 'created_at', 'updated_at',
-            'name', 'content', 'image', 'is_owner'
+            'id', 'owner', 'is_owner', 'created_at', 'updated_at',
+            'name', 'content', 'image'
             ]       # ou coloca isso pra inserir tudo: '__all__'
