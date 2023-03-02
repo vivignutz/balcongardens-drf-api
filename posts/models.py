@@ -23,6 +23,7 @@ class Post(models.Model):
         ('kelvin', 'Kelvin'),
         ('monstera_deliciosa', 'Monstera Deliciosa'),
         ('oregano_tree', 'Oregano Tree'),
+        ('salads', 'Salads'),
         ('strawberries', 'Strawberries'),
         ('suculents', 'Suculents'),
         ('tomatoes', 'Tomatoes'),
