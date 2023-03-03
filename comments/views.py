@@ -4,7 +4,8 @@ from .models import Comment
 from .serializers import CommentSerializer, CommentDetailSerializer
 
 
-class CommentList(generics.ListCreateAPIView): # list GET and create POST
+class CommentList(generics.ListCreateAPIView):
+    # list GET and create POST
     """
     List comments or create a comment if logged in.
     """
@@ -12,7 +13,7 @@ class CommentList(generics.ListCreateAPIView): # list GET and create POST
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Comment.objects.all()
 
-    def perform_create(self, serializer): # é pra "defining"
+    def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
 
