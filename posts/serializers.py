@@ -9,8 +9,11 @@ class PostSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     like_id = serializers.SerializerMethodField()
+    likes_count = serializers.ReadOnlyField()
+    comments_count = serializers.ReadOnlyField()
 
-    def validate_image(self, value): # se a img form maior q 2mb, da o erro
+    def validate_image(self, value):
+        # se a img form maior q 2mb, da o erro
         """ Image validation for all images uploaded by users
             with error messages when larger than default
         """
@@ -46,5 +49,6 @@ class PostSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
-            'title', 'content', 'image', 'image_filter', 'like_id',
+            'title', 'content', 'image', 'image_filter',
+            'like_id', 'likes_count', 'comments_count',
         ]      # ou coloca isso pra inserir tudo: '__all__'
