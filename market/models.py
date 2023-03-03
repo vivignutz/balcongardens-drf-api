@@ -2,13 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Post(models.Model):
+class Plants(models.Model):
     """
-    Post model, related to 'owner', i.e. a User instance.
-    Default image set so that we can always reference image.url.
-    Filter for image choice.
+    Model that provides the fields to create/retrieve/update
+    list of plants offered to exchange in the db by the user
+    instance. Posts opens only for logged in users.
+    Image required, that should be uploaded by the owner.
     """
-
     image_filter_choices = [
         ('amaryllis', 'Amaryllis'),
         ('begonia', 'Begonia'),
@@ -31,17 +31,30 @@ class Post(models.Model):
         ('other', 'Other')
     ]
 
+    difficulty_level_choices = [
+        ('1', 'Low'),
+        ('2', 'Moderate'),
+        ('3', 'High'),
+        ('4', 'Expert'),
+        ('5', 'Almost impossible!')
+    ]
+
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    title = models.CharField(max_length=255)
-    content = models.TextField(blank=True)
-    image = models.ImageField(
-            upload_to='images/', default='../default_post_rgq6aq', blank=True
+    name = models.CharField(max_length=80)
+    specie = models.CharField(
+        max_length=32, choices=image_filter_choices
     )
-    image_filter = models.CharField(
-        max_length=32, choices=image_filter_choices, default='normal'
-        )
+    difficulty_level = models.CharField(
+        max_length=32, choices=difficulty_level_choices, default=None
+    )
+    email = models.CharField
+    city = models.CharField(max_length=30)
+    postal_code = models.CharField(max_length=15)
+    image = models.ImageField(
+        upload_to='images/', default='../default_post_rb5ucj', blank=True
+    )
 
     class Meta:
         ordering = ['-created_at']
