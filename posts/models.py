@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     """
-    Post model, related to 'owner', i.e. a User instance.
-    Default image set so that we can always reference image.url.
-    Filter for image choice.
+    Model that provides the fields to create/retrieve/update
+    list of plants offered to exchange in the db by the user
+    instance. Posts opens only for logged in users.
+    Image required, that should be uploaded by the owner.
     """
-
     image_filter_choices = [
         ('amaryllis', 'Amaryllis'),
         ('begonia', 'Begonia'),
@@ -31,17 +31,32 @@ class Post(models.Model):
         ('other', 'Other')
     ]
 
+    difficulty_level_choices = [
+        ('1', 'Low'),
+        ('2', 'Moderate'),
+        ('3', 'High'),
+        ('4', 'Expert'),
+        ('5', 'Almost impossible!')
+    ]
+
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    title = models.CharField(max_length=255)
-    content = models.TextField(blank=True)
-    image = models.ImageField(
-            upload_to='images/', default='../default_post_rgq6aq', blank=True
-    )
-    image_filter = models.CharField(
-        max_length=32, choices=image_filter_choices, default='normal'
+    title = models.CharField(max_length=80, null=False, blank=False, default='')
+    content = models.TextField(blank=True, null=False, default='')
+    plant_type = models.CharField(
+        max_length=32, choices=image_filter_choices,
+        null=False, default=''
         )
+    difficulty_level = models.CharField(
+        max_length=1, choices=difficulty_level_choices,
+        null=True, blank=True, default=''
+        )
+    email = models.CharField
+    city = models.CharField(max_length=30, null=False, blank=False, default='')
+    postal_code = models.CharField(max_length=15, null=False, blank=False)
+    image = models.ImageField(
+            upload_to='images/', default='../default_post_rgq6aq', blank=True)
 
     class Meta:
         ordering = ['-created_at']
