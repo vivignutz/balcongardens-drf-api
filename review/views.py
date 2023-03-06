@@ -1,11 +1,8 @@
-from rest_framework import viewsets
-from .serializers import RatingSerializer
+from rest_framework import generics
 from .models import Rating
+from .serializers import RatingSerializer
 
 
-class RatingViewSet(viewsets.ModelViewSet):
-    """
-    To get all plants review in random order
-    """
-    queryset = Rating.objects.all().order_by('?')
+class RatingView(generics.CreateAPIView):
+    queryset = Rating.objects.all()
     serializer_class = RatingSerializer
