@@ -26,11 +26,15 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 REST_FRAMEWORK = {
-    'DEFAUL_AUTHENTICATION_CLASSES': [(
+    'DEFAULT_AUTHENTICATION_CLASSES': [(
         'rest_framework.authentication.SessionAuthentication'
-        if 'DEV in os. environ'
+        if 'DEV' in os.environ
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
-    )]
+    )],
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DATETIME_FORMAT': '%d %b %Y',
 }
 
 REST_USE_JWT = True
@@ -47,7 +51,7 @@ REST_AUTH_SERIALIZERS = {
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY ='django-insecure-t@-@)yvyq42@z1i5!131qa16y&#6y8!hq1689^b0i1%r7ce^7)'
+SECRET_KEY = 'django-insecure-t@-@)yvyq42@z1i5!131qa16y&#6y8!hq1689^b0i1%r7ce^7)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

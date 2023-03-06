@@ -2,6 +2,7 @@ from rest_framework import serializers
 from posts.models import Post
 from likes.models import Like
 from saved.models import Save
+from review.models import Rating
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -51,7 +52,7 @@ class PostSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         if user.is_authenticated:
             save = Save.objects.filter(
-                owner=user, plant=obj
+                owner=user, post=obj
             ).first()
             return save.id if save else None
         return None
@@ -61,7 +62,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields = [
             'image', 'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
-            'name', 'content', 'email', 'city', 'postal_code',
-            'difficulty', 'like_id', 'likes_count',
+            'title', 'content', 'email', 'city', 'postal_code',
+            'difficulty_level', 'like_id', 'likes_count',
             'comments_count', 'save_id',
         ]      # ou coloca isso pra inserir tudo: '__all__'
