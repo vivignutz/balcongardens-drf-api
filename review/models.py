@@ -4,4 +4,4 @@ from posts.models import Post
 
 
 class Rating(models.Model):
-    stars = models.IntegerField()
+    stars = models.IntegerField(default=0)

@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import serializers, generics
 from .models import Rating
 from .serializers import RatingSerializer
 
