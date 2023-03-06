@@ -1,7 +1,7 @@
 from rest_framework import generics, permissions
 from .models import Save
 from .serializers import SaveSerializer
-from cdrf_api.permissions import IsOwnerOrReadOnly
+from drf_api.permissions import IsOwnerOrReadOnly
 
 
 class SaveList(generics.ListCreateAPIView):

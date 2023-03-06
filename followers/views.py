@@ -1,7 +1,7 @@
 from rest_framework import generics, permissions
+from .models import Follower
+from .serializers import FollowerSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
-from likes.models import Follower
-from likes.serializers import FollowSerializer
 
 
 class FollowerList(generics.ListCreateAPIView):

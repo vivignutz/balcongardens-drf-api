@@ -42,21 +42,23 @@ class Post(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    title = models.CharField(max_length=80, null=False, blank=False, default='')
-    content = models.TextField(blank=True, null=False, default='')
+    title = models.CharField(
+        max_length=80, null=False, blank=False, default='')
+    content = models.TextField(
+        blank=True, null=False, default='')
     plant_type = models.CharField(
         max_length=32, choices=image_filter_choices,
-        null=False, default=''
-        )
+        null=False, default='')
     difficulty_level = models.CharField(
         max_length=1, choices=difficulty_level_choices,
-        null=True, blank=True, default=''
-        )
+        null=True, blank=True, default='')
     email = models.CharField
-    city = models.CharField(max_length=30, null=False, blank=False, default='')
-    postal_code = models.CharField(max_length=15, null=False, blank=False)
+    city = models.CharField(
+        max_length=30, null=False, blank=False, default='')
+    postal_code = models.CharField(
+        max_length=15, null=False, blank=False)
     image = models.ImageField(
-            upload_to='images/', default='../default_post_rgq6aq', blank=True)
+            upload_to='images/', default='', blank=False)
 
     class Meta:
         ordering = ['-created_at']
