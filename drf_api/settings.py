@@ -62,9 +62,9 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['localhost', 'balcongardens.herokuapp.com']
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST'), 'localhost', 'balcongardens.herokuapp.com']
 
 
 # Application definition
@@ -115,12 +115,16 @@ if 'CLIENT_ORIGIN' in os.environ:
         os.environ.get('CLIENT_ORIGIN')
     ]
 
-else:
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
     CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https://.*\.gitpod\.io$",
+        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
     ]
 
-# Enable sending cookies in cross-origin requests so that users can get authentication functionality
+"""
+Enable sending cookies in cross-origin requests
+so that users can get authentication functionality
+"""
 CORS_ALLOW_CREDENTIALS = True
 
 
