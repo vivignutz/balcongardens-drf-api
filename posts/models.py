@@ -46,13 +46,14 @@ class Post(models.Model):
         max_length=80, null=False, blank=False, default='')
     content = models.TextField(
         blank=True, null=False, default='')
-    #plant_type = models.CharField(
-    #    max_length=32, choices=image_filter_choices,
-    #    null=False, default='')
+# plant_type = models.CharField(
+# max_length=32, choices=image_filter_choices,
+# null=False, default='')
     difficulty_level = models.CharField(
         max_length=1, choices=difficulty_level_choices,
         null=True, blank=True, default='')
-    email = models.CharField
+    email = models.CharField(
+        max_length=30, default="youremailhere@mail.com")
     city = models.CharField(
         max_length=30, null=False, blank=False, default='')
     postal_code = models.CharField(
