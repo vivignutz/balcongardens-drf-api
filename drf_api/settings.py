@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import re
 import dj_database_url
 
 if os.path.exists('env.py'):
@@ -67,6 +68,30 @@ DEBUG = 'DEV' in os.environ
 ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST'), 'localhost', 'balcongardens.herokuapp.com']
 
 
+if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
+
+
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+    extracted_url = re.match(
+        r'^.+-', os.environ.get(
+            'CLIENT_ORIGIN_DEV', ''
+            ), re.IGNORECASE
+        ).group(0)
+
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+    ]
+
+"""
+Enable sending cookies in cross-origin requests
+so that users can get authentication functionality
+"""
+CORS_ALLOW_CREDENTIALS = True
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -97,7 +122,7 @@ INSTALLED_APPS = [
     'review',
 ]
 
-SIDE_ID = 1
+SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -108,33 +133,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
-
-
-if 'CLIENT_ORIGIN' in os.environ:
-    CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
-    ]
-
-"""
-
-"""
-if 'CLIENT_ORIGIN_DEV' in os.environ:
-    extracted_url = re.match(
-        r'^.+-', os.environ.get(
-            'CLIENT_ORIGIN_DEV', ''
-            ), re.IGNORECASE
-        ).group(0)
-
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
-    ]
-
-"""
-Enable sending cookies in cross-origin requests
-so that users can get authentication functionality
-"""
-CORS_ALLOW_CREDENTIALS = True
-
 
 ROOT_URLCONF = 'drf_api.urls'
 
