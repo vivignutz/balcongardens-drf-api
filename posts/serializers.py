@@ -61,8 +61,7 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = [
             'image', 'id', 'owner', 'is_owner', 'profile_id',
-            'profile_image', 'created_at', 'updated_at',
-            'title', 'content', 'email', 'city', 'postal_code',
-            'difficulty_level', 'like_id', 'likes_count',
-            'comments_count', 'save_id',
+            'profile_image', 'created_at', 'title', 'content',
+            'email', 'city', 'plant_type', 'difficulty_level',
+            'like_id', 'likes_count', 'comments_count', 'save_id',
         ]      # ou coloca isso pra inserir tudo: '__all__'
