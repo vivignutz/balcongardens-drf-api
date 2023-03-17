@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from posts.models import Post
 from likes.models import Like
-from review.models import Rating
+#from review.models import Rating
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -12,10 +12,8 @@ class PostSerializer(serializers.ModelSerializer):
     like_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
-    save_id = serializers.SerializerMethodField()
 
     def validate_image(self, value):
-        # se a img form maior q 2mb, da o erro
         """
         Image validation for all images uploaded by users
         with error messages when larger than default
@@ -47,14 +45,6 @@ class PostSerializer(serializers.ModelSerializer):
             return like.id if like else None
         return None
 
-    def get_save_id(self, obj):
-        user = self.context['request'].user
-        if user.is_authenticated:
-            save = Save.objects.filter(
-                owner=user, post=obj
-            ).first()
-            return save.id if save else None
-        return None
 
     class Meta:
         model = Post
