@@ -42,7 +42,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     title = models.CharField(
         max_length=80, null=False, blank=False, default='')
-    content = models.TextField(
+    description = models.TextField(
         blank=True, null=False, default='')
     difficulty_level = models.CharField(
         max_length=1, choices=difficulty_level_choices,
@@ -53,7 +53,7 @@ class Post(models.Model):
     email = models.CharField(
         max_length=30, default="youremailhere@mail.com")
     city = models.CharField(
-        max_length=30, null=False, blank=False, default='')
+        max_length=30, null=True, blank=False, default='')
     image = models.ImageField(
             upload_to='images/', default='', blank=False)
 
