@@ -41,5 +41,5 @@ class ProfileSerializer(serializers.ModelSerializer):
             'following_id',
             'followers_count',
             'following_count'
-            'posts_count'
+            'posts_count',
             ]
