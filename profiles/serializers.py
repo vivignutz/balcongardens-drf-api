@@ -40,6 +40,6 @@ class ProfileSerializer(serializers.ModelSerializer):
             'city',
             'following_id',
             'followers_count',
-            'following_count'
+            'following_count',
             'posts_count',
             ]
