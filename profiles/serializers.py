@@ -36,7 +36,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             'updated_at',
             'name',
             'description',
-            'image'
+            'image',
             'city',
             'following_id',
             'followers_count',
