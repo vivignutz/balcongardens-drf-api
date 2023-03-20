@@ -50,8 +50,6 @@ class Post(models.Model):
     plant_type = models.CharField(
         max_length=30, choices=plant_type_choices,
         null=True, blank=True, default='')
-    email = models.CharField(
-        max_length=30, default="youremailhere@mail.com")
     city = models.CharField(
         max_length=30, null=True, blank=False, default='')
     image = models.ImageField(
